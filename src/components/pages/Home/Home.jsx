@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 // import popApi from "components/API/popApi";
@@ -7,16 +8,19 @@ const URL = `https://api.themoviedb.org/3/trending/all/day?api_key=${KEY}`;
 
 const Home = () => {
     const [popArr, setPopArr] = useState([]);
+    // const [id, setId] = useState('');
     // console.log("!!!");
 
     useEffect(() => {
         axios.get(URL).then(({ data }) => setPopArr(data.results));
-        axios.get(URL).then(({data})=>console.log(data.results));
+        // axios.get(URL).then(({data})=>console.log(data.results));
+        
     }, []);
+
     
     const popList = popArr.map(({id,original_title,original_name}) => (
         <li key={id}>
-            <a href="backdrop_path">{original_title??original_name}</a>
+            <Link to={`/movie/${id}`}>{original_title??original_name}</Link>
         </li>
     ));
 
