@@ -10,7 +10,7 @@ const MovieDetails = ({cast,reviews}) => {
     const { movieId } = useParams();    // const params = useParams(); так було!
     // console.log(movieId);            // console.log(params);
     const navigate = useNavigate();
-    const goBack = () => navigate(-1);
+    const goBack = () => navigate(-1); // дозволяє перейти на попередню сторінку! Можна вказати i конкретну напр.:("/movie")
 
     const [poster, setPoster] = useState([]);
 

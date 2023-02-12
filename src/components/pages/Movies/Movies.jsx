@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
+import PostList from "components/modules/PostList/PostList";
 
 const Movies = () => {
     const [value, setValue] = useState('');
@@ -29,11 +29,7 @@ const Movies = () => {
         // setSearchParam({ search });
     };
 
-    const filmList=films.map(({id, original_title, original_name})=>(
-        <li key={id}>
-            <Link to={`/movie/${id}`}>{original_title??original_name}</Link>
-        </li>
-    ));
+
     return (
         <>
             <form onSubmit={onSearch}>
@@ -41,9 +37,7 @@ const Movies = () => {
                 <button type="submit">Search</button>
             </form>
 
-            <ul>
-                {filmList}
-            </ul>
+            {films.length > 0 && <PostList items={films} />}
         </>
     );
 };
