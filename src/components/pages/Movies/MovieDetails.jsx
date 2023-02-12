@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
-import { useParams, NavLink } from "react-router-dom";
+import { useParams, NavLink, Link } from "react-router-dom";
 import axios from "axios";
 
-const MovieDetails = () => {
+import Cast from "./Cast";
+// import Re
+import  image_template  from "../../../pict/image_template.jpg";
+
+const MovieDetails = ({cast,reviews}) => {
     const { movieId } = useParams();    // const params = useParams(); так було!
     // console.log(movieId);            // console.log(params);
     const [poster, setPoster] = useState([]);
@@ -21,8 +25,10 @@ const MovieDetails = () => {
     return (
         <>
             <div>
-                <button type="button">go back</button>
-                <img src={`https://image.tmdb.org/t/p/original${poster_path}`} alt="#" width={240} />
+                <Link to={'/'}>
+                    <button type="button">go back</button>
+                </Link>
+                <img src={poster_path?`https://image.tmdb.org/t/p/original${poster_path}`:image_template} alt="#" width={240} />
                 <h2>{original_title}</h2>
                 <p>User Score: {Math.round(popularity)}%</p>
                 <h3>Overviev</h3>
@@ -39,6 +45,8 @@ const MovieDetails = () => {
                 </ul>
             </div>
 
+            {cast&&< Cast/>}
+            {/* {reviews&&< Cast/>} */}
         </>
     )
 };

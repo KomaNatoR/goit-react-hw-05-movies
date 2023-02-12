@@ -7,9 +7,11 @@ const Movies = () => {
     const [value, setValue] = useState('');
     const [films, setFilms] = useState([]);
 
+    // const [searcParams, setSearchParam] = useSearchParams;
+    // const search = searcParams.get('query');
+
     const onSearch = (e) => {
         e.preventDefault();
-        console.dir(value);
 
         const KEY = '7456877804751c2ee672618d82b01711';
         const URL = `https://api.themoviedb.org/3/search/movie?api_key=${KEY}&language=en-US&page=1&include_adult=false&query=${value}`;
@@ -23,7 +25,8 @@ const Movies = () => {
         setFilms(data.results);
     };
     const onChange = (e) => {
-        setValue(e.currentTarget.value)
+        setValue(e.currentTarget.value);
+        // setSearchParam({ search });
     };
 
     const filmList=films.map(({id, original_title, original_name})=>(
