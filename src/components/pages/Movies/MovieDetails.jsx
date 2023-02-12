@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, NavLink, Link } from "react-router-dom";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
 import axios from "axios";
 
 import Cast from "./Cast";
@@ -9,6 +9,9 @@ import  image_template  from "../../../pict/image_template.jpg";
 const MovieDetails = ({cast,reviews}) => {
     const { movieId } = useParams();    // const params = useParams(); так було!
     // console.log(movieId);            // console.log(params);
+    const navigate = useNavigate();
+    const goBack = () => navigate(-1);
+
     const [poster, setPoster] = useState([]);
 
     useEffect(() => {
@@ -25,9 +28,8 @@ const MovieDetails = ({cast,reviews}) => {
     return (
         <>
             <div>
-                <Link to={'/'}>
-                    <button type="button">go back</button>
-                </Link>
+                <button type="button" onClick={goBack}>Go back</button>
+
                 <img src={poster_path?`https://image.tmdb.org/t/p/original${poster_path}`:image_template} alt="#" width={240} />
                 <h2>{original_title}</h2>
                 <p>User Score: {Math.round(popularity)}%</p>
