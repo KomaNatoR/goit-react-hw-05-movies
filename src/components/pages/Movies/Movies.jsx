@@ -10,7 +10,7 @@ const Movies = () => {
 
     const [searchParams, setSearchParam] = useSearchParams();// searchParams це як стейт!
     const search = searchParams.get('query'); // тут пишеться назва параметру!
-    console.log(search);
+    // console.log(search);
 
     useEffect(() => {
         const KEY = '7456877804751c2ee672618d82b01711';
