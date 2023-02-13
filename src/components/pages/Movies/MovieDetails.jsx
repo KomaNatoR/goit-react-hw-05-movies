@@ -22,7 +22,7 @@ const MovieDetails = ({cast,reviews}) => {
         const URL = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${KEY}&language=en-US`;
         
         axios.get(URL).then(({ data }) => setPoster(data));
-        // axios.get(URL).then(({data})=>console.log(data));
+        // axios.get(URL).then(({data})=>console.log(data)).catch(err=>console.log(err));
     }, [movieId]);
 
     const { original_title, poster_path, popularity, overview, genres=[] } = poster;
@@ -32,7 +32,7 @@ const MovieDetails = ({cast,reviews}) => {
             <div>
                 <button type="button" onClick={goBack}>Go back</button>
 
-                <img src={poster_path?`https://image.tmdb.org/t/p/original${poster_path}`:image_template} alt="#" width={240} />
+                <img src={poster_path ? `https://image.tmdb.org/t/p/original${poster_path}` : image_template} alt="#" width={240} />
                 <h2>{original_title}</h2>
                 <p>User Score: {Math.round(popularity)}%</p>
                 <h3>Overviev</h3>
@@ -44,13 +44,13 @@ const MovieDetails = ({cast,reviews}) => {
             <div>
                 <h2>Additional information</h2>
                 <ul>
-                    <NavLink state={{from}} to={`/movie/${movieId}/cast`}><li>Cast</li></NavLink>
-                    <NavLink state={{from}} to={`/movie/${movieId}/reviews`}><li>Reviews</li></NavLink>
+                    <NavLink state={{ from }} to={`/movie/${movieId}/cast`}><li>Cast</li></NavLink>
+                    <NavLink state={{ from }} to={`/movie/${movieId}/reviews`}><li>Reviews</li></NavLink>
                 </ul>
             </div>
-            <Outlet /> 
+            <Outlet />
         </>
-    )
+    );
 };
 
 export default MovieDetails;
