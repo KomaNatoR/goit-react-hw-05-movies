@@ -13,6 +13,7 @@ const Movies = () => {
     // console.log(search);
 
     useEffect(() => {
+        if (!search) return;
         const KEY = '7456877804751c2ee672618d82b01711';
         const URL = `https://api.themoviedb.org/3/search/movie?api_key=${KEY}&language=en-US&page=1&include_adult=false&query=${search}`;
 

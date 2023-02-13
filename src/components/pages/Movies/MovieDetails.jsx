@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, NavLink } from "react-router-dom";
+import { useParams, useNavigate, Outlet, useLocation, NavLink } from "react-router-dom";
 import axios from "axios";
 
-import Cast from "./Cast";
-// import Re
-import  image_template  from "../../../pict/image_template.jpg";
+import image_template from "../../../pict/image_template.jpg";
 
 const MovieDetails = ({cast,reviews}) => {
+    const [poster, setPoster] = useState([]);
+
     const { movieId } = useParams();    // const params = useParams(); так було!
     // console.log(movieId);            // console.log(params);
     const navigate = useNavigate(); // дозволяє перейти на попередню сторінку!
-    const goBack = () => navigate(-1); // Можна вказати i конкретну напр.:("/movie")
+    const location = useLocation();
+    const from = location.state?.from||"/movie";
+    // console.log("MovieDetails:",location.state.from);
+    const goBack = () => navigate(from);
+    // const goBack = () => navigate(-1); // Можна вказати i конкретну напр.:("/movie")!
 
-    const [poster, setPoster] = useState([]);
 
     useEffect(() => {
         const KEY = '7456877804751c2ee672618d82b01711';
@@ -21,7 +24,6 @@ const MovieDetails = ({cast,reviews}) => {
         axios.get(URL).then(({ data }) => setPoster(data));
         // axios.get(URL).then(({data})=>console.log(data));
     }, [movieId]);
-    console.log(poster);
 
     const { original_title, poster_path, popularity, overview, genres=[] } = poster;
     const genresMap = genres.map(genr => genr.name).join(", ");
@@ -42,13 +44,11 @@ const MovieDetails = ({cast,reviews}) => {
             <div>
                 <h2>Additional information</h2>
                 <ul>
-                    <NavLink to={`/movie/${movieId}/cast`}><li>Cast</li></NavLink>
-                    <NavLink to={`/movie/${movieId}/reviews`}><li>Reviews</li></NavLink>
+                    <NavLink state={{from}} to={`/movie/${movieId}/cast`}><li>Cast</li></NavLink>
+                    <NavLink state={{from}} to={`/movie/${movieId}/reviews`}><li>Reviews</li></NavLink>
                 </ul>
             </div>
-
-            {cast&&< Cast/>}
-            {/* {reviews&&< Cast/>} */}
+            <Outlet /> 
         </>
     )
 };

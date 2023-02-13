@@ -14,8 +14,9 @@ const Reviews = () => {
         
         axios.get(URL).then(({ data }) => setReviews(data.results));
         // axios.get(URL).then(({data})=>console.log(data.results));     
-    });
+    },[movieId]);
 
+    
     const reviewsList = reviews.map(({id, author, content}) => (
         <li key={id}>
             <h3>{author}</h3>
