@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useParams, useNavigate, Outlet, useLocation, NavLink } from "react-router-dom";
 import axios from "axios";
 
@@ -48,7 +48,10 @@ const MovieDetails = ({cast,reviews}) => {
                     <NavLink state={{ from }} to={`/movie/${movieId}/reviews`}><li>Reviews</li></NavLink>
                 </ul>
             </div>
-            <Outlet />
+            <Suspense fallback={<p>...loading</p>}>
+                <Outlet />
+            </Suspense>
+            
         </>
     );
 };

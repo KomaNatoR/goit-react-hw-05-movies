@@ -16,9 +16,9 @@ const PostSearchForm = ({onSubmit}) => {
         e.preventDefault();
 
         onSubmit({ ...state });
-        setState({
-            search:"",
-        });
+        // setState({
+        //     search:"",
+        // });
     };
 
     return (
